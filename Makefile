@@ -16,6 +16,11 @@ HDR_FILES :=	philo.h
 
 # Files
 SRC_FILES :=	main.c \
+				ft_atoi.c \
+				ft_atoi_l.c \
+				ft_numcheck.c \
+				parse.c \
+				add_philos.c \
 
 SRC := $(addprefix $(SRC_DIR)/, $(SRC_FILES))
 OBJ := ${addprefix ${OBJ_DIR}/, ${SRC_FILES:.c=.o}}
