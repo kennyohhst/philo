@@ -6,23 +6,36 @@
 /*   By: kkalika <kkalika@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/13 21:41:30 by code              #+#    #+#             */
-/*   Updated: 2023/07/08 19:56:28 by kkalika          ###   ########.fr       */
+/*   Updated: 2023/07/09 15:59:25 by kkalika          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef PHILO_H
 # define PHILO_H
 
+# include <unistd.h>
+# include <stdio.h>
+# include <pthread.h>
+# include <stdlib.h>
+
 
 
 typedef struct table
 {
-	int				philo;
-	int				die;
-	int				eat;
-	int				sleep;
-	// pthread_t		*philos;
+	int				philo_total;
+	int				forks_total;
 }t_table;
+
+typedef struct philos
+{
+	pthread_mutex_t	*forks;
+	int				eat;	
+	int				sleep;
+	int				eating_amount;
+	int				die;
+	t_table			*table;
+	pthread_t		philo;
+}t_philo;
 
 typedef	struct s_god
 {
@@ -35,11 +48,6 @@ typedef	struct s_god
 }t_god;
 
 
-
-# include <unistd.h>
-# include <stdio.h>
-# include <pthread.h>
-# include <stdlib.h>
 
 t_god	*parse(int argc, char **argv);
 int		ft_atoi(const char *str);
