@@ -6,7 +6,7 @@
 /*   By: kkalika <kkalika@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/13 21:41:30 by code              #+#    #+#             */
-/*   Updated: 2023/07/09 15:59:25 by kkalika          ###   ########.fr       */
+/*   Updated: 2023/07/10 23:04:47 by kkalika          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,22 +17,26 @@
 # include <stdio.h>
 # include <pthread.h>
 # include <stdlib.h>
+# include <stdbool.h>
 
 
 
-typedef struct table
+typedef struct s_table
 {
-	int				philo_total;
-	int				forks_total;
+	int						id;
+	pthread_mutex_t			*l_fork;
+	struct s_table			*next;
+	// struct s_table	*prev;
 }t_table;
 
 typedef struct philos
 {
-	pthread_mutex_t	*forks;
+	int				bobs_id;
 	int				eat;	
 	int				sleep;
 	int				eating_amount;
 	int				die;
+	int				fork;
 	t_table			*table;
 	pthread_t		philo;
 }t_philo;
@@ -44,6 +48,7 @@ typedef	struct s_god
 	int			sleep;
 	int			eat;
 	int			eating_amount;
+	t_philo		*philos[200];
 	t_table		*table;
 }t_god;
 
@@ -58,6 +63,8 @@ void	add_eating_amount(t_god **temp, char *num);
 void	add_death(t_god **temp, char *num);
 void	add_sleep(t_god **temp, char *num);
 void	add_eat(t_god **temp, char *num);
+void	start_sim(t_god *data);
+
 
 
 

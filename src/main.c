@@ -6,7 +6,7 @@
 /*   By: kkalika <kkalika@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/08 17:48:01 by kkalika           #+#    #+#             */
-/*   Updated: 2023/07/08 17:48:05 by kkalika          ###   ########.fr       */
+/*   Updated: 2023/07/10 23:13:22 by kkalika          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,12 +14,29 @@
 
 void	test(t_god **temp, int argc)
 {
-	printf("philos\t\t\t:	%d\n", (*temp)->philo);
-	printf("death time\t\t:	%d\n", (*temp)->die);
-	printf("sleep time\t\t:	%d\n", (*temp)->sleep);
-	printf("eating time\t\t:	%d\n", (*temp)->eat);
-	if (argc == 6)
-		printf("eating amount\t\t:	%d\n", (*temp)->eating_amount);
+	// TEST GOD_STRUCT:
+	// printf("philos\t\t\t:	%d\n", (*temp)->philo);
+	// printf("death time\t\t:	%d\n", (*temp)->die);
+	// printf("sleep time\t\t:	%d\n", (*temp)->sleep);
+	// printf("eating time\t\t:	%d\n", (*temp)->eat);
+	// if (argc == 6)
+	// 	printf("eating amount\t\t:	%d\n", (*temp)->eating_amount);
+
+	// TEST TABLE STRUCT:
+
+	// TEST BOB:
+	int	i = 0;
+	while (i != (*temp)->philo)
+	{
+		printf("bob_%i:	 eat:%d\t", i, (*temp)->philos[i]->eat);
+		printf("sleep:%d\t", (*temp)->philos[i]->sleep);
+		printf("die:%d", (*temp)->philos[i]->die);
+		if (argc == 6)
+			printf("\teating_amount:%d\n", (*temp)->philos[i]->eating_amount);
+		else
+			printf("\n");
+		i++;
+	}
 }
 
 
@@ -29,10 +46,19 @@ int	main(int argc, char **argv)
 {
 	// int	result;
 	t_god	*data;
+	int i;
 
+	i = 0;
 
 	data = parse(argc, argv);
-	test(&data, argc);
+	start_sim(data);
+
+	// pthread_create(&data->philos[0]->philo, NULL, &func, data->philos[0]);
+	// pthread_create(&data->philos[1]->philo, NULL, &func, data->philos[1]);
+	// pthread_create(&data->philos[2]->philo, NULL, &func, data->philos[2]);
+
+	// pthread_join(data->philos[0]->philo, NULL);
+	// test(&data, argc);
 	
 
 

@@ -21,6 +21,7 @@ SRC_FILES :=	main.c \
 				ft_numcheck.c \
 				parse.c \
 				add_philos.c \
+				start_sim.c \
 
 SRC := $(addprefix $(SRC_DIR)/, $(SRC_FILES))
 OBJ := ${addprefix ${OBJ_DIR}/, ${SRC_FILES:.c=.o}}
