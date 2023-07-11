@@ -6,7 +6,7 @@
 /*   By: kkalika <kkalika@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/08 17:48:01 by kkalika           #+#    #+#             */
-/*   Updated: 2023/07/10 23:13:22 by kkalika          ###   ########.fr       */
+/*   Updated: 2023/07/11 19:14:32 by kkalika          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,10 @@ void	test(t_god **temp, int argc)
 	}
 }
 
-
+void	checkleaks()
+{
+	system("leaks philo");
+}
 
 
 int	main(int argc, char **argv)
@@ -49,15 +52,25 @@ int	main(int argc, char **argv)
 	int i;
 
 	i = 0;
-
+	// atexit(checkleaks);
 	data = parse(argc, argv);
+	if (!data)
+		return (STDERR_FILENO);
 	start_sim(data);
+
+	
+
+
 
 	// pthread_create(&data->philos[0]->philo, NULL, &func, data->philos[0]);
 	// pthread_create(&data->philos[1]->philo, NULL, &func, data->philos[1]);
 	// pthread_create(&data->philos[2]->philo, NULL, &func, data->philos[2]);
-
-	// pthread_join(data->philos[0]->philo, NULL);
+	while (i != data->philo)
+	{
+		pthread_join(data->philos[i]->philo, NULL);
+		i++;
+	}
+	
 	// test(&data, argc);
 	
 

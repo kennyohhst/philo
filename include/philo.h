@@ -6,7 +6,7 @@
 /*   By: kkalika <kkalika@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/13 21:41:30 by code              #+#    #+#             */
-/*   Updated: 2023/07/10 23:04:47 by kkalika          ###   ########.fr       */
+/*   Updated: 2023/07/11 19:52:12 by kkalika          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,13 +57,26 @@ typedef	struct s_god
 t_god	*parse(int argc, char **argv);
 int		ft_atoi(const char *str);
 long	ft_atoi_l(const char *str);
-void	ft_numcheck(char *str);
-void	add_philos(t_god **temp, char *num);
-void	add_eating_amount(t_god **temp, char *num);
-void	add_death(t_god **temp, char *num);
-void	add_sleep(t_god **temp, char *num);
-void	add_eat(t_god **temp, char *num);
+int		ft_numcheck(char *str);
+int		add_philos(t_god **temp, char *num);
+int		add_eating_amount(t_god **temp, char *num);
+int		add_death(t_god **temp, char *num);
+int		add_sleep(t_god **temp, char *num);
+int		add_eat(t_god **temp, char *num);
 void	start_sim(t_god *data);
+int		err_exit(int i, void *data);
+int		check_args(int argc, char **argv);
+int		basic_data(t_god **temp, int argc, char **argv);
+int		build_table(t_god **data, int i);
+t_philo	*build_philos(t_god **temp);
+int		make_round(t_god *data);
+
+
+
+
+
+
+
 
 
 

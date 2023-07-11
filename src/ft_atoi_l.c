@@ -6,7 +6,7 @@
 /*   By: kkalika <kkalika@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/21 18:58:58 by kkalika           #+#    #+#             */
-/*   Updated: 2023/07/08 17:17:51 by kkalika          ###   ########.fr       */
+/*   Updated: 2023/07/11 18:48:48 by kkalika          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,13 +45,3 @@ long	ft_atoi_l(const char *str)
 	}
 	return (x * neg);
 }
-
-
-// #include <stdio.h>
-
-// int	main(void)
-// {
-// 	printf("%ld\n", ft_atoi_l("3465045867"));
-// 	return (0);
-
-// }

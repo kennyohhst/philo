@@ -8,7 +8,7 @@ OBJ_DIR := obj
 
 # Compiler flags
 CC := gcc
-CFLAGS := -Wall -Werror -Wextra -g -fsanitize=address
+CFLAGS := -Wall -Werror -Wextra -g #-fsanitize=address
 
 # Includes
 HDR_FILES :=	philo.h
@@ -19,9 +19,11 @@ SRC_FILES :=	main.c \
 				ft_atoi.c \
 				ft_atoi_l.c \
 				ft_numcheck.c \
+				build.c	\
 				parse.c \
 				add_philos.c \
 				start_sim.c \
+				err_exit.c \
 
 SRC := $(addprefix $(SRC_DIR)/, $(SRC_FILES))
 OBJ := ${addprefix ${OBJ_DIR}/, ${SRC_FILES:.c=.o}}
