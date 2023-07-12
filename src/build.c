@@ -6,7 +6,7 @@
 /*   By: kkalika <kkalika@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/08 15:54:31 by kkalika           #+#    #+#             */
-/*   Updated: 2023/07/11 20:25:11 by kkalika          ###   ########.fr       */
+/*   Updated: 2023/07/12 16:17:26 by kkalika          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,11 @@ int	make_round(t_god *data)
 		data->philos[i++]->table = temp;
 		temp = temp->next;
 	}
+	temp->l_fork = malloc(sizeof(pthread_mutex_t));
+	if (!temp->l_fork)
+		return (0);
+	pthread_mutex_init(temp->l_fork, NULL);
+	data->philos[i++]->table = temp;
 	temp->next = data->table;
 	temp->next->l_fork = data->table->l_fork;
 	return (1);

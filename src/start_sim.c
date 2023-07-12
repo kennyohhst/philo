@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   start_sim.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: code <code@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: kkalika <kkalika@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/10 18:09:21 by kkalika           #+#    #+#             */
-/*   Updated: 2023/07/11 21:52:11 by code             ###   ########.fr       */
+/*   Updated: 2023/07/12 16:58:50 by kkalika          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,32 +14,15 @@
 
 int	grab_fork(t_philo **philo)
 {
-	int i;
-	
-	i = pthread_mutex_lock((*philo)->table->l_fork);
-	if (i == 0)
-	{
-		i = pthread_mutex_lock((*philo)->table->next->l_fork);
-		if (i == 0)
-		{
-			// printf("bobs_id: %d\n table_id:	%d\n", (*data)->philos[(*data)->table->id]->bobs_id, (*data)->table->id);
-			printf("%d locked by: %d\n", (*philo)->table->id, (*philo)->bobs_id);
-			pthread_mutex_unlock((*philo)->table->next->l_fork);
-			return (1);
-		}
-		else
-			pthread_mutex_unlock((*philo)->table->l_fork);
-	}
-	else
-	{
-		pthread_mutex_unlock((*philo)->table->l_fork);	
-		return (0);
-	}
+	pthread_mutex_lock((*philo)->table->l_fork);
+
+	pthread_mutex_lock((*philo)->table->next->l_fork);
+	printf("bob_%d is eating\n", (*philo)->bobs_id);
 	// sleep(1);
+	pthread_mutex_unlock((*philo)->table->next->l_fork);
 
-	// (*data)->table = (*data)->table->next;
-
-	
+	pthread_mutex_unlock((*philo)->table->l_fork);
+	printf("bob_%d done eating\n", (*philo)->bobs_id);
 	return (1);
 }
 
@@ -58,9 +41,11 @@ void	*life(void *philo)
 	{
 		if(grab_fork(&temp))
 		{
-			write(1, "im here\n", 9);
-			printf("bob_%d thinks he is at table_%d\n", temp->bobs_id, temp->table->id);
+			printf("bob_%d is inside statement with: %d\n", temp->bobs_id, temp->table->id);
 		}
+		printf("bob_%d is sleeping: %d\n", temp->bobs_id, temp->table->id);
+		// sleep(5);
+
 	}
 
 	return (NULL);
@@ -74,7 +59,7 @@ void	start_sim(t_god *data)
 	while (i != data->philo)
 	{
 		pthread_create(&data->philos[i]->philo, NULL, &life, data->philos[i]);
-		sleep(1);
+		// sleep(1);
 		++i;
 		
 	}
