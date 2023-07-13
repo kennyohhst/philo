@@ -6,7 +6,7 @@
 /*   By: kkalika <kkalika@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/08 15:54:31 by kkalika           #+#    #+#             */
-/*   Updated: 2023/07/12 16:17:26 by kkalika          ###   ########.fr       */
+/*   Updated: 2023/07/13 18:52:06 by kkalika          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,10 +46,12 @@ t_philo	*build_philos(t_god **temp)
 	if (!bob)
 		return (NULL);
 	bob->bobs_id = 0;
-	bob->die = (*temp)->die;
-	bob->sleep = (*temp)->sleep;
-	bob->eat = (*temp)->eat;
+	bob->total_philos = (*temp)->philo;
+	bob->die = (*temp)->die * 1000;
+	bob->sleep = (*temp)->sleep * 1000;
+	bob->eat = (*temp)->eat * 1000;
 	bob->eating_amount = (*temp)->eating_amount;
+	bob->dead = false;
 	bob->table = (*temp)->table;
 	return (bob);
 }
@@ -63,6 +65,7 @@ int	build_table(t_god **data, int i)
 	if (!new)
 		return (0);
 	new->id = i;
+	new->grab = false;
 	temp = (*data)->table;
 	if (temp)
 	{

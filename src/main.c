@@ -6,7 +6,7 @@
 /*   By: kkalika <kkalika@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/08 17:48:01 by kkalika           #+#    #+#             */
-/*   Updated: 2023/07/11 19:14:32 by kkalika          ###   ########.fr       */
+/*   Updated: 2023/07/13 21:03:59 by kkalika          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,13 @@ void	checkleaks()
 {
 	system("leaks philo");
 }
+long	ft_time(void)
+{
+	struct timeval	start;
 
+	gettimeofday(&start, NULL);
+	return ((start.tv_sec * 1000000 + start.tv_usec));
+}
 
 int	main(int argc, char **argv)
 {
@@ -55,69 +61,21 @@ int	main(int argc, char **argv)
 	// atexit(checkleaks);
 	data = parse(argc, argv);
 	if (!data)
-		return (STDERR_FILENO);
+		return (EXIT_FAILURE);
+	// while (ft_time() <= data->philos[0]->sleep)	
+	// 	printf("time: %ld\nsleep:	%d\neat:	%d\n", ft_time(), data->philos[0]->sleep, data->philos[0]->eat);	
 	start_sim(data);
-
-	
-
-
-
-	// pthread_create(&data->philos[0]->philo, NULL, &func, data->philos[0]);
-	// pthread_create(&data->philos[1]->philo, NULL, &func, data->philos[1]);
-	// pthread_create(&data->philos[2]->philo, NULL, &func, data->philos[2]);
-	while (i != data->philo)
+	while (1)
 	{
-		pthread_join(data->philos[i]->philo, NULL);
+		if (data->philos[i]->dead)
+		{
+			printf("%d has died\n", data->philos[i]->bobs_id);
+			break ;
+		}
 		i++;
+		if (data->philo == i)
+			i = 0;
 	}
-	
-	// test(&data, argc);
-	
-
-
-
-	// pthread_t	thread_a;
-	// pthread_t	thread_b;
-	// pthread_t	thread_c;
-	// pthread_t	thread_d;
-	// printf("before create\n");
-	
-	// result = pthread_create(&thread_a, NULL, pthread_function, (void*)&"banaan");
-	// result = pthread_create(&thread_b, NULL, pthread_function, (void*)&"hi");
-	// result = pthread_create(&thread_c, NULL, pthread_function, (void*)&"here");
-	// result = pthread_create(&thread_d, NULL, pthread_function, (void*)&"yes");
-	// printf("after create\n");
-	
-	// if (!result)
-	// {
-	// 	printf("during result check 1\n");
-	// 	// return (0);
-	// }
-	// printf("after result check 1\n");
-	// // usleep(100);
-	// printf("before join\n");
-	
-	// result = pthread_join(thread_a, NULL);
-	// printf("after thread_join\n");
-	// if (!result)
-	// {
-	// 	printf("during result check 2\n");
-	// 	return (0);
-	// }
-	// 	printf("this should not happen\n");
+	free(data);
 	return (0);
 }
-
-// void	*pthread_function(void	*args)
-// {
-// 	pthread_mutex_t	mutex;
-
-// 	pthread_mutex_init(&mutex, NULL);
-// 	static int i = 0;
-
-// 	pthread_mutex_lock(&mutex);
-// 	printf("eating\n%s	%d\n", (char *)args, i++);
-// 	pthread_exit(NULL);	
-// 	pthread_mutex_unlock(&mutex);
-// 	pthread_mutex_destroy(&mutex);
-// }
