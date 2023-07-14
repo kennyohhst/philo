@@ -1,35 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   ft_time.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: kkalika <kkalika@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/07/08 17:48:01 by kkalika           #+#    #+#             */
-/*   Updated: 2023/07/14 22:33:31 by kkalika          ###   ########.fr       */
+/*   Created: 2023/07/14 20:28:18 by kkalika           #+#    #+#             */
+/*   Updated: 2023/07/14 22:35:35 by kkalika          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/philo.h"
 
-void	checkleaks()
+void	set_time(t_philo *bob)
 {
-	system("leaks philo");
+	if (!pthread_mutex_lock(bob->god->time))
+		bob->start_time = ft_time();
+	pthread_mutex_unlock(bob->god->time);
 }
 
-int	main(int argc, char **argv)
+long	ft_time(void)
 {
-	t_god	*data;
-	int i;
+	struct timeval	start;
 
-	i = 0;
-	// atexit(checkleaks);
-	data = parse(argc, argv);
-	if (!data)
-		return (EXIT_FAILURE);
-	
-	// freelosopher(data);
-	start_sim(data);
-	
-	return (0);
+	gettimeofday(&start, NULL);
+	return ((start.tv_sec * 1000000 + start.tv_usec));
 }
+

@@ -6,7 +6,7 @@
 /*   By: kkalika <kkalika@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/08 15:54:31 by kkalika           #+#    #+#             */
-/*   Updated: 2023/07/13 18:52:06 by kkalika          ###   ########.fr       */
+/*   Updated: 2023/07/14 21:34:16 by kkalika          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,13 +45,14 @@ t_philo	*build_philos(t_god **temp)
 	bob = malloc(sizeof(t_philo));
 	if (!bob)
 		return (NULL);
+	bob->time_bob = malloc(sizeof(pthread_mutex_t));
+	bob->god = (*temp);
 	bob->bobs_id = 0;
 	bob->total_philos = (*temp)->philo;
 	bob->die = (*temp)->die * 1000;
 	bob->sleep = (*temp)->sleep * 1000;
 	bob->eat = (*temp)->eat * 1000;
 	bob->eating_amount = (*temp)->eating_amount;
-	bob->dead = false;
 	bob->table = (*temp)->table;
 	return (bob);
 }
@@ -84,6 +85,7 @@ int	build_table(t_god **data, int i)
 
 int	basic_data(t_god **temp, int argc, char **argv)
 {
+	(*temp)->death = malloc(sizeof(pthread_mutex_t));
 	if (add_philos(temp, argv[1]))
 		return (add_philos(temp, argv[1]));
 	if (add_death(temp, argv[2]))
@@ -97,6 +99,8 @@ int	basic_data(t_god **temp, int argc, char **argv)
 		if (add_eating_amount(temp, argv[5]))
 			return (add_eating_amount(temp, argv[5]));
 	}
+	(*temp)->msg = malloc(sizeof(pthread_mutex_t));
+	(*temp)->time = malloc(sizeof(pthread_mutex_t));
 	return (0);
 }
 
