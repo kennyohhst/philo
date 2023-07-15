@@ -6,7 +6,7 @@
 /*   By: kkalika <kkalika@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/08 17:48:01 by kkalika           #+#    #+#             */
-/*   Updated: 2023/07/14 22:33:31 by kkalika          ###   ########.fr       */
+/*   Updated: 2023/07/15 15:35:38 by kkalika          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ int	main(int argc, char **argv)
 	data = parse(argc, argv);
 	if (!data)
 		return (EXIT_FAILURE);
-	
+	data->check_death = malloc(sizeof(pthread_t));
 	// freelosopher(data);
 	start_sim(data);
 	

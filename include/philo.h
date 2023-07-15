@@ -6,7 +6,7 @@
 /*   By: kkalika <kkalika@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/13 21:41:30 by code              #+#    #+#             */
-/*   Updated: 2023/07/14 23:26:23 by kkalika          ###   ########.fr       */
+/*   Updated: 2023/07/15 16:10:13 by kkalika          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,11 +38,11 @@ typedef struct philos
 	int				die;
 	int				fork;
 	bool			stop;
+	long			start_time;
 	t_table			*table;
 	pthread_t		philo;
-	long			start_time;
-	pthread_mutex_t	*time_bob;
 	struct s_god	*god;
+	pthread_mutex_t	*time_bob;
 }t_philo;
 
 typedef	struct s_god

@@ -6,7 +6,7 @@
 /*   By: kkalika <kkalika@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/10 18:09:21 by kkalika           #+#    #+#             */
-/*   Updated: 2023/07/14 23:17:02 by kkalika          ###   ########.fr       */
+/*   Updated: 2023/07/15 16:26:06 by kkalika          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,17 +53,17 @@ void	eat_sleep_think(t_philo *philo)
 	// printf("%4ldms %d is sleeping\n", ft_time() - philo->start_time, philo->bobs_id);
 }
 
-int	ft_stop(t_philo *temp)
+int	ft_stop(t_philo *bob)
 {
-	if (pthread_mutex_lock(temp->god->death))
+	if (pthread_mutex_lock(bob->god->death))
 	{
-		if (temp->god->bobs_blood)
+		if (bob->god->bobs_blood)
 		{
-			printf_msg(temp->god, " died", temp->bobs_id);
-			pthread_mutex_unlock(temp->god->death);
+			printf_msg(bob->god, " died", bob->bobs_id);
+			pthread_mutex_unlock(bob->god->death);
 			return (1) ;
 		}
-		pthread_mutex_unlock(temp->god->death);
+		pthread_mutex_unlock(bob->god->death);
 	}
 	return (0);
 }
@@ -78,17 +78,11 @@ void	data_race_check(t_philo *bob)
 	}	
 }
 
-
-
-
 void	*life(void *philo)
 { 
 	t_philo *bob;
 
 	bob = (t_philo *) philo;
-
-	// while (1)
-	// 	data_race_check(bob);
 	set_time(bob);
 	while (1)
 	{
@@ -107,10 +101,15 @@ void	start_sim(t_god *data)
 	int	i;
 
 	i = 0;
-	while (i != data->philo)
+	pthread_create(&data->check_death, NULL, &death, data);
+	while (i < data->philo)
 	{
 		pthread_create(&data->philos[i]->philo, NULL, &life, data->philos[i]);
+		pthread_join(data->philos[i]->philo, NULL);
+			// pthread_join(data->check_death, NULL);
+			
+		printf("welcome bob_%d\n\n", i);
 		++i;
 	}
-	pthread_create(&data->check_death, NULL, &death, data);
+
 }

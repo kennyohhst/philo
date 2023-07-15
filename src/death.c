@@ -6,7 +6,7 @@
 /*   By: kkalika <kkalika@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/13 20:08:44 by kkalika           #+#    #+#             */
-/*   Updated: 2023/07/14 23:35:58 by kkalika          ###   ########.fr       */
+/*   Updated: 2023/07/15 16:20:56 by kkalika          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,20 +34,21 @@ void	new_time_die(t_philo *bob)
 }
 int	check_death(t_philo *bob)
 {
-	if (pthread_mutex_lock(bob->god->time))
+	if (pthread_mutex_lock(bob->god->death))
 	{
 		if ((ft_time() - bob->start_time) > bob->die)
 		{
 			printf("bob_%d welcome, you have %d sec left to live\n", bob->bobs_id, (ft_time() - bob->start_time) > bob->die);
 			printf_msg(bob->god, "deded", bob->bobs_id);
 			bob->god->bobs_blood = true;
-			pthread_mutex_unlock(bob->god->time);
+			pthread_mutex_unlock(bob->god->death);
 			return (1);	
 		}
 	}
 	pthread_mutex_unlock(bob->god->time);
 	return (0);
 }
+			// pthread_mutex_lock(bob->god->msg);
 
 void	*death(void *god)
 {
@@ -55,21 +56,21 @@ void	*death(void *god)
 	int	i;
 
 	i = 0;
+	
 	temp = (t_god *) god;
 	
 	while (i != temp->philo)
 	{
-		printf("welcome %d\n\n", i);
 		if (check_death(temp->philos[i]))
-		{
-			// pthread_mutex_lock(temp->death);
-			// temp->bobs_blood = true;
-			// pthread_mutex_unlock(temp->death);
 			return (NULL);
-		}
 		i++;
-		if (temp->philo == i)
+		if (i == (temp->philo))
 			i = 0;
 	}
+	// {
+	// 	i++;
+	// 	if (temp->philo == i)
+	// 		i = 0;
+	// }
 	return (NULL);
 }
