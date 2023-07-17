@@ -1,43 +1,40 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   build_table.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: kkalika <kkalika@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/07/08 17:48:01 by kkalika           #+#    #+#             */
-/*   Updated: 2023/07/17 18:40:10 by kkalika          ###   ########.fr       */
+/*   Created: 2023/07/17 18:42:12 by kkalika           #+#    #+#             */
+/*   Updated: 2023/07/17 18:42:38 by kkalika          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/philo.h"
 
-void	checkleaks()
+int	build_table(t_god **data, int i)
 {
-	system("leaks philo");
-}
+	t_table	*new;
+	t_table	*temp;
 
-int	main(int argc, char **argv)
-{
-	t_god	*data;
-	long i;
-
-	i = 0;
-	// atexit(checkleaks);
-	data = parse(argc, argv);
-	if (!data)
-		return (EXIT_FAILURE);
-	init_mutex(data);
-	start_sim(data);
-	
-	while (i != data->philo)
+	new = malloc(sizeof(t_table));
+	if (!new)
+		return (0);
+	new->id = i;
+	new->grab = false;
+	temp = (*data)->table;
+	new->l_fork = malloc(sizeof(pthread_mutex_t));
+	if (temp)
 	{
-		pthread_join(data->philos[i]->philo, NULL);
-		i++;
+		while (temp->next != NULL)
+			temp = temp->next;
+		temp->next = new;
+		new->next = NULL;
 	}
-	pthread_join(data->check_death, NULL);
-	// freelosopher(data);
-	
-	
-	return (0);
+	else
+	{
+		new->next = NULL;
+		(*data)->table = new;
+	}
+	return (1);
 }

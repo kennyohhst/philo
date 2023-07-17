@@ -1,0 +1,11 @@
+   1ms 0 has taken a fork
+   1ms 0 has taken a fork
+   1ms 0 is eating
+ 201ms 0 is sleeping
+ 201ms 1 has taken a fork
+ 201ms 1 has taken a fork
+hello
+ 201ms 1  died
+ 401ms 0 is thinking
+hello
+ 401ms 0  died

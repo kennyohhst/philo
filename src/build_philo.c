@@ -1,43 +1,32 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   build_philo.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: kkalika <kkalika@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/07/08 17:48:01 by kkalika           #+#    #+#             */
-/*   Updated: 2023/07/17 18:40:10 by kkalika          ###   ########.fr       */
+/*   Created: 2023/07/17 18:43:38 by kkalika           #+#    #+#             */
+/*   Updated: 2023/07/17 18:44:02 by kkalika          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/philo.h"
 
-void	checkleaks()
+t_philo	*build_philos(t_god **temp)
 {
-	system("leaks philo");
-}
+	t_philo	*bob;
 
-int	main(int argc, char **argv)
-{
-	t_god	*data;
-	long i;
-
-	i = 0;
-	// atexit(checkleaks);
-	data = parse(argc, argv);
-	if (!data)
-		return (EXIT_FAILURE);
-	init_mutex(data);
-	start_sim(data);
-	
-	while (i != data->philo)
-	{
-		pthread_join(data->philos[i]->philo, NULL);
-		i++;
-	}
-	pthread_join(data->check_death, NULL);
-	// freelosopher(data);
-	
-	
-	return (0);
+	bob = malloc(sizeof(t_philo));
+	if (!bob)
+		return (NULL);
+	bob->time_bob = malloc(sizeof(pthread_mutex_t));
+	bob->god = (*temp);
+	bob->bobs_id = 0;
+	bob->total_philos = (*temp)->philo;
+	bob->die = (*temp)->die * 1000;
+	bob->sleep = (*temp)->sleep * 1000;
+	bob->eat = (*temp)->eat * 1000;
+	bob->eating_amount = (*temp)->eating_amount;
+	bob->table = (*temp)->table;
+	return (bob);
 }

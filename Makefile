@@ -28,6 +28,14 @@ SRC_FILES :=	main.c \
 				death.c	\
 				ft_time.c \
 				ft_freelosopher.c \
+				init_mutex.c \
+				basic_data.c \
+				build_table.c \
+				build_philo.c \
+				make_round.c \
+				grab_fork.c \
+				ft_usleep.c
+
 
 SRC := $(addprefix $(SRC_DIR)/, $(SRC_FILES))
 OBJ := ${addprefix ${OBJ_DIR}/, ${SRC_FILES:.c=.o}}
@@ -45,7 +53,7 @@ all: ${NAME}
 
 $(NAME): $(OBJ)
 	@printf "%b%s%b" "$(YELLOW)$(BOLD)" "Compiling $(NICKNAME)..." "$(RESET)"
-	@gcc $(CFLAGS) $(OBJ) -o $(NAME) -pthread
+	@gcc $(CFLAGS) $(OBJ) -o $(NAME) -lpthread
 	@printf "\t\t%b%s%b\n" "$(GREEN)$(BOLD)" "[OK]" "$(RESET)"
 
 $(OBJ_DIR)/%.o: src/%.c $(HDR)
