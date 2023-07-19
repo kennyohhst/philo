@@ -6,7 +6,7 @@
 /*   By: kkalika <kkalika@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/17 19:55:46 by kkalika           #+#    #+#             */
-/*   Updated: 2023/07/17 20:23:26 by kkalika          ###   ########.fr       */
+/*   Updated: 2023/07/19 16:55:24 by kkalika          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,9 +39,9 @@ int	grab_fork(t_philo **philo)
 	if (ft_stop((*philo)))
 		return (0);
 	while (!grab_fork_fork((*philo)->table))
-		usleep(100);
+		ft_usleep(100);
 	while (!grab_fork_fork((*philo)->table->next))
-		usleep(100);
+		ft_usleep(100);
 	printf_msg((*philo)->god, "has taken a fork", (*philo)->bobs_id);
 	printf_msg((*philo)->god, "has taken a fork", (*philo)->bobs_id);
 	if (ft_stop((*philo)))

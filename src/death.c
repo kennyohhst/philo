@@ -6,7 +6,7 @@
 /*   By: kkalika <kkalika@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/13 20:08:44 by kkalika           #+#    #+#             */
-/*   Updated: 2023/07/17 20:44:47 by kkalika          ###   ########.fr       */
+/*   Updated: 2023/07/19 17:14:47 by kkalika          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 void	new_time_eat(t_philo *bob)
 {
 	pthread_mutex_lock(bob->god->death);
+	// printf("hi\n");
 		bob->last_food = ft_time();
 		// printf("die: %ld\neat: %ld\nsleep: %ld\n", bob->die, bob->eat, bob->sleep);
 	pthread_mutex_unlock(bob->god->death);
@@ -23,7 +24,7 @@ void	new_time_eat(t_philo *bob)
 void	new_time_sleep(t_philo *bob)
 {
 	pthread_mutex_lock(bob->god->death);
-		// bob->start_time = ft_time();
+		// bob->god->start_time = ft_time();
 	pthread_mutex_unlock(bob->god->death);
 }
 
@@ -37,8 +38,9 @@ void	new_time_die(t_philo *bob)
 int	check_death(t_philo *bob)
 {
 	pthread_mutex_lock(bob->god->death);
-	// printf("bob_%d welcome, you have %d sec left to live\n", bob->bobs_id, (ft_time() - bob->start_time) > bob->die);
-	if ((ft_time() - bob->last_food) > (bob->die / 1000))
+	// printf("bob_%d welcome, you have %d sec left to live\n", bob->bobs_id, (ft_time() - bob->last_food) > bob->die);
+	// printf("bob_%d	death:	%ld	current:	%ld last_meal:	%ld\n", bob->bobs_id, bob->die, ft_time(), bob->last_food);
+	if (bob->last_food && (ft_time() - bob->last_food) > (bob->die / 1000))
 	{
 		// printf("sum: %ld\n eat %ld\n", (ft_time() - bob->god->start_time), bob->eat);
 		bob->god->bobs_blood = true;

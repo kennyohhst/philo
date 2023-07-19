@@ -6,7 +6,7 @@
 /*   By: kkalika <kkalika@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/10 18:09:21 by kkalika           #+#    #+#             */
-/*   Updated: 2023/07/17 20:23:37 by kkalika          ###   ########.fr       */
+/*   Updated: 2023/07/19 17:51:41 by kkalika          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,8 +15,12 @@
 void	printf_msg(t_god *god, char *str, int i)
 {
 	pthread_mutex_lock(god->msg);
-	printf("%4ldms %d %s\n", ft_time() - god->start_time, god->philos[i]->bobs_id, str);
+	
+	printf("%ld %d %s\n", ft_time() - god->start_time, god->philos[i]->bobs_id, str);
+	if (!ft_strncmp(str, " died", 5))
+		return ;	
 	pthread_mutex_unlock(god->msg);
+
 }
 
 void	let_go(t_philo *philo)
@@ -38,7 +42,8 @@ int	eat_sleep_think(t_philo *philo)
 	new_time_eat(philo);
 	printf_msg(philo->god, "is sleeping", philo->bobs_id);
 	ft_usleep(philo->sleep);
-	// new_time_sleep(philo);
+	
+	new_time_sleep(philo);
 	return (0);
 }
 
@@ -47,10 +52,11 @@ int	ft_stop(t_philo *bob)
 	pthread_mutex_lock(bob->god->death);
 	if (bob->god->bobs_blood)
 	{
-		printf("hello\n");
+		// printf("hello\n");
 		printf_msg(bob->god, " died", bob->bobs_id);
 		pthread_mutex_unlock(bob->god->death);
-		return (1) ;
+		exit(0);
+		// return (1) ;
 	}
 	pthread_mutex_unlock(bob->god->death);
 	return (0);
@@ -61,7 +67,7 @@ void	*life(void *philo)
 	t_philo *bob;
 
 	bob = (t_philo *) philo;
-	pthread_detach(bob->philo);
+	// pthread_detach(bob->philo);
 	while (1 && !ft_stop(bob))
 	{
 		if (ft_stop(bob))
@@ -90,5 +96,6 @@ void	start_sim(t_god *data)
 		++i;
 	}
 	pthread_create(&data->check_death, NULL, &death, data);
+	pthread_detach(data->check_death);
 
 }

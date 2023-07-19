@@ -6,7 +6,7 @@
 /*   By: kkalika <kkalika@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/13 21:41:30 by code              #+#    #+#             */
-/*   Updated: 2023/07/17 20:41:38 by kkalika          ###   ########.fr       */
+/*   Updated: 2023/07/19 16:26:56 by kkalika          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -99,6 +99,7 @@ bool	grab_fork_fork(t_table *chair);
 int		grab_fork(t_philo **philo);
 void	drop_fork_fork(t_table *chair);
 void	ft_usleep(long time);
+int		ft_strncmp(const char *s1, const char *s2, size_t n);
 
 
 

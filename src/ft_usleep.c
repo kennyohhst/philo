@@ -6,7 +6,7 @@
 /*   By: kkalika <kkalika@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/17 20:17:00 by kkalika           #+#    #+#             */
-/*   Updated: 2023/07/17 20:30:18 by kkalika          ###   ########.fr       */
+/*   Updated: 2023/07/19 19:23:29 by kkalika          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,6 @@ void	ft_usleep(long time)
 	while ((ft_time() - begin) < time)
 	{
 		// printf("som: %ld\ntime:	%ld\n", (ft_time() - begin), time);
-		usleep(420);
+		usleep(50);
 	}
 }

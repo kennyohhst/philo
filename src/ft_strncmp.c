@@ -1,45 +1,34 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   ft_strncmp.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: kkalika <kkalika@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/07/08 17:48:01 by kkalika           #+#    #+#             */
-/*   Updated: 2023/07/19 17:39:02 by kkalika          ###   ########.fr       */
+/*   Created: 2023/07/19 16:25:21 by kkalika           #+#    #+#             */
+/*   Updated: 2023/07/19 16:25:41 by kkalika          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/philo.h"
 
-void	checkleaks()
+int	ft_strncmp(const char *s1, const char *s2, size_t n)
 {
-	system("leaks philo");
-}
+	unsigned char	*one;
+	unsigned char	*two;
+	size_t			i;
+	int				c;
 
-int	main(int argc, char **argv)
-{
-	t_god	*data;
-	long i;
-
+	one = (unsigned char *) s1;
+	two = (unsigned char *) s2;
 	i = 0;
-	// atexit(checkleaks);
-	data = parse(argc, argv);
-	data->bobs_blood = false;
-	if (!data)
-		return (EXIT_FAILURE);
-	init_mutex(data);
-	start_sim(data);
-	pthread_mutex_unlock(data->msg);
-	
-	while (i != data->philo)
+	while (i < n)
 	{
-		pthread_join(data->philos[i]->philo, NULL);
+		if (one[i] == '\0' && two[i] == '\0')
+			return (0);
+		if (one[i] != two[i])
+			return (c = (one[i] - two[i]));
 		i++;
 	}
-	pthread_join(data->check_death, NULL);
-	freelosopher(data);
-	
-	
 	return (0);
 }

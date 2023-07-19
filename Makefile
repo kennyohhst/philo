@@ -9,7 +9,7 @@ OBJ_DIR := obj
 # Compiler flags
 CC := gcc
 CFLAGS := -Wall -Werror -Wextra -g #-fsanitize=address
-CFLAGS +=	-fsanitize=thread 
+# CFLAGS +=	-fsanitize=thread 
 
 # Includes
 HDR_FILES :=	philo.h
@@ -34,7 +34,8 @@ SRC_FILES :=	main.c \
 				build_philo.c \
 				make_round.c \
 				grab_fork.c \
-				ft_usleep.c
+				ft_usleep.c \
+				ft_strncmp.c \
 
 
 SRC := $(addprefix $(SRC_DIR)/, $(SRC_FILES))
