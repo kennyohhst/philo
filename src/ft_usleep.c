@@ -6,15 +6,16 @@
 /*   By: kkalika <kkalika@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/17 20:17:00 by kkalika           #+#    #+#             */
-/*   Updated: 2023/07/19 19:23:29 by kkalika          ###   ########.fr       */
+/*   Updated: 2023/07/20 19:32:58 by kkalika          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/philo.h"
 
-void	ft_usleep(long time)
+void	ft_usleep(long time, t_philo *bob)
 {
 	long begin;
+	(void) bob;
 
 	begin = ft_time();
 	time = time / 1000;

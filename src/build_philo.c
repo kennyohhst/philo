@@ -6,7 +6,7 @@
 /*   By: kkalika <kkalika@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/17 18:43:38 by kkalika           #+#    #+#             */
-/*   Updated: 2023/07/17 18:44:02 by kkalika          ###   ########.fr       */
+/*   Updated: 2023/07/20 19:17:06 by kkalika          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,5 +28,6 @@ t_philo	*build_philos(t_god **temp)
 	bob->eat = (*temp)->eat * 1000;
 	bob->eating_amount = (*temp)->eating_amount;
 	bob->table = (*temp)->table;
+	bob->stop = false;
 	return (bob);
 }

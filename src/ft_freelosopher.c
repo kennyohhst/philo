@@ -6,7 +6,7 @@
 /*   By: kkalika <kkalika@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/14 21:40:28 by kkalika           #+#    #+#             */
-/*   Updated: 2023/07/17 18:39:14 by kkalika          ###   ########.fr       */
+/*   Updated: 2023/07/20 19:13:27 by kkalika          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ void	free_bob(t_god *god)
 	int	i;
 
 	i = 0;
-	printf("im here\n");
+	// printf("im here\n");
 	while (god->philos[i])
 	{
 		pthread_mutex_destroy(god->philos[i]->time_bob);
