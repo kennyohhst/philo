@@ -6,7 +6,7 @@
 /*   By: kkalika <kkalika@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/17 18:42:12 by kkalika           #+#    #+#             */
-/*   Updated: 2023/07/17 18:42:38 by kkalika          ###   ########.fr       */
+/*   Updated: 2023/07/21 19:22:44 by kkalika          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,6 @@ int	build_table(t_god **data, int i)
 	new->id = i;
 	new->grab = false;
 	temp = (*data)->table;
-	new->l_fork = malloc(sizeof(pthread_mutex_t));
 	if (temp)
 	{
 		while (temp->next != NULL)

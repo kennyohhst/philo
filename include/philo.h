@@ -6,7 +6,7 @@
 /*   By: kkalika <kkalika@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/13 21:41:30 by code              #+#    #+#             */
-/*   Updated: 2023/07/21 18:04:51 by kkalika          ###   ########.fr       */
+/*   Updated: 2023/07/21 20:18:33 by kkalika          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,13 +24,14 @@ typedef struct s_table
 {
 	int				id;
 	bool			grab;
-	pthread_mutex_t	*l_fork;
+	pthread_mutex_t	l_fork;
 	struct s_table	*next;
 	struct s_table	*prev;
 }t_table;
 
 typedef struct philos
 {
+	bool			present;
 	long			last_food;
 	int				bobs_id;
 	long			eat;	
@@ -38,12 +39,10 @@ typedef struct philos
 	int				eating_amount;
 	long			die;
 	int				fork;
-	// bool			stop;
 	t_table			*table;
 	pthread_t		philo;
-	pthread_mutex_t nomnom;
+	pthread_mutex_t	nomnom;
 	struct s_god	*god;
-	
 }t_philo;
 
 typedef struct s_god
@@ -60,9 +59,9 @@ typedef struct s_god
 	t_philo			*philos[200];
 	t_table			*table;
 	pthread_t		check_death;
-	pthread_mutex_t	*death;
-	pthread_mutex_t	*msg;
-	pthread_mutex_t	*time;
+	pthread_mutex_t	death;
+	pthread_mutex_t	msg;
+	pthread_mutex_t	time;
 }t_god;
 
 int		eat_sleep_think(t_philo *philo);
@@ -89,9 +88,9 @@ void	new_time_eat(t_philo *bob);
 void	new_time_sleep(t_philo *bob);
 void	new_time_die(t_philo *bob);
 void	freelosopher(t_god *data);
-void	printf_msg(t_god *god, char *str, int i, long stamp);
+void	printf_msg(t_god *god, char *str, int i);
 void	init_mutex(t_god *data);
-int		ft_stop(t_philo *philo);
+int		ft_stop(t_god *data);
 int		basic_data(t_god **temp, int argc, char **argv);
 int		build_table(t_god **data, int i);
 t_philo	*build_philos(t_god **temp);

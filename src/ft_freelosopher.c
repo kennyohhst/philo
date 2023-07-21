@@ -6,7 +6,7 @@
 /*   By: kkalika <kkalika@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/14 21:40:28 by kkalika           #+#    #+#             */
-/*   Updated: 2023/07/21 15:42:21 by kkalika          ###   ########.fr       */
+/*   Updated: 2023/07/21 19:24:00 by kkalika          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,12 +14,10 @@
 
 void	end_universe(t_god *god)
 {
-	pthread_mutex_destroy(god->time);
-	pthread_mutex_destroy(god->death);
-	pthread_mutex_destroy(god->msg);
-	free(god->death);
-	free(god->time);
-	free(god->msg);
+	pthread_mutex_destroy(&god->time);
+	pthread_mutex_destroy(&god->death);
+	pthread_mutex_destroy(&god->msg);
+
 	free(god);
 }
 
@@ -30,6 +28,7 @@ void	free_bob(t_god *god)
 	i = 0;
 	while (god->philo)
 	{
+		pthread_mutex_destroy(&god->philos[i]->nomnom);
 		free(god->philos[i]);
 		i++;
 		god->philo--;
@@ -49,8 +48,7 @@ void	free_list(t_god *god)
 	}
 	while (i < god->philo)
 	{
-		pthread_mutex_destroy(god->table->l_fork);
-		free(god->table->l_fork);
+		pthread_mutex_destroy(&god->table->l_fork);
 		temp = god->table;
 		god->table = god->table->next;
 		free(temp);

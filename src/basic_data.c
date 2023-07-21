@@ -6,7 +6,7 @@
 /*   By: kkalika <kkalika@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/17 18:41:05 by kkalika           #+#    #+#             */
-/*   Updated: 2023/07/21 18:08:49 by kkalika          ###   ########.fr       */
+/*   Updated: 2023/07/21 19:22:52 by kkalika          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,8 +29,5 @@ int	basic_data(t_god **temp, int argc, char **argv)
 		if (add_eating_amount(temp, argv[5]))
 			return (add_eating_amount(temp, argv[5]));
 	}
-	(*temp)->death = malloc(sizeof(pthread_mutex_t));
-	(*temp)->msg = malloc(sizeof(pthread_mutex_t));
-	(*temp)->time = malloc(sizeof(pthread_mutex_t));
 	return (0);
 }

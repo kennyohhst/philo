@@ -6,11 +6,25 @@
 /*   By: kkalika <kkalika@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/21 16:15:53 by kkalika           #+#    #+#             */
-/*   Updated: 2023/07/21 17:58:43 by kkalika          ###   ########.fr       */
+/*   Updated: 2023/07/21 20:37:26 by kkalika          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/philo.h"
+
+// bool	everyone_ready(t_god *data)
+// {
+// 	int	i;
+	
+// 	i = 0;
+// 	while (data->philo != i)
+// 	{
+// 		data->philos[i]->present
+		
+// 		i++;
+// 	}
+	
+// }
 
 void	*life(void *philo)
 {
@@ -21,12 +35,17 @@ void	*life(void *philo)
 		return (bobs_single(bob));
 	if (bob->bobs_id % 2)
 		ft_usleep(bob->eat / 2);
-	while (!ft_stop(bob))
+	pthread_mutex_lock(&bob->god->death);
+	bob->last_food = ft_time();
+	// while (!everyone_ready(bob->god))
+	// 	;
+	pthread_mutex_unlock(&bob->god->death);
+	while (!ft_stop(bob->god))
 	{
 		grab_fork(&bob);
 		eat_sleep_think(bob);
-		if (!ft_stop(bob))
-			printf_msg(bob->god, "is thinking", bob->bobs_id, 0);
+		if (!ft_stop(bob->god))
+			printf_msg(bob->god, "is thinking", bob->bobs_id);
 	}
 	return (NULL);
 }
