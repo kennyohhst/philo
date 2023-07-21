@@ -6,7 +6,7 @@
 /*   By: kkalika <kkalika@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/08 17:48:01 by kkalika           #+#    #+#             */
-/*   Updated: 2023/07/21 15:16:11 by kkalika          ###   ########.fr       */
+/*   Updated: 2023/07/21 17:04:21 by kkalika          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,19 +28,17 @@ int	main(int argc, char **argv)
 	data->bobs_blood = false;
 	if (!data)
 		return (EXIT_FAILURE);
+	// printf("%d\n", data->eating_amount);
 	init_mutex(data);
-	start_sim(data);
+	// if (argc == 5)
+		start_sim(data);
 	pthread_mutex_unlock(data->msg);
-	
 	while (i != data->philo)
 	{
 		pthread_join(data->philos[i]->philo, NULL);
 		i++;
 	}
 	pthread_join(data->check_death, NULL);
-printf("I've recalled all the bobs and will end the universe!\n");
 	freelosopher(data);
-	
-	
 	return (0);
 }

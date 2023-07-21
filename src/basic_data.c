@@ -6,7 +6,7 @@
 /*   By: kkalika <kkalika@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/17 18:41:05 by kkalika           #+#    #+#             */
-/*   Updated: 2023/07/17 18:41:18 by kkalika          ###   ########.fr       */
+/*   Updated: 2023/07/21 18:08:49 by kkalika          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,8 +22,10 @@ int	basic_data(t_god **temp, int argc, char **argv)
 		return (add_eat(temp, argv[3]));
 	if (add_sleep(temp, argv[4]))
 		return (add_sleep(temp, argv[4]));
+	(*temp)->fifth_arg = false;
 	if (argc == 6)
 	{
+		(*temp)->fifth_arg = true;
 		if (add_eating_amount(temp, argv[5]))
 			return (add_eating_amount(temp, argv[5]));
 	}

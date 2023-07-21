@@ -6,7 +6,7 @@
 /*   By: kkalika <kkalika@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/17 18:44:46 by kkalika           #+#    #+#             */
-/*   Updated: 2023/07/17 18:45:03 by kkalika          ###   ########.fr       */
+/*   Updated: 2023/07/21 15:37:28 by kkalika          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,4 +30,3 @@ int	make_round(t_god *data)
 	data->table->prev = temp;
 	return (1);
 }
-

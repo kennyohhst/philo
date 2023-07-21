@@ -6,7 +6,7 @@
 /*   By: kkalika <kkalika@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/13 20:08:44 by kkalika           #+#    #+#             */
-/*   Updated: 2023/07/21 15:08:51 by kkalika          ###   ########.fr       */
+/*   Updated: 2023/07/21 18:09:40 by kkalika          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,67 +15,85 @@
 void	new_time_eat(t_philo *bob)
 {
 	pthread_mutex_lock(bob->god->death);
-		bob->last_food = ft_time();
+	bob->last_food = ft_time();
 	pthread_mutex_unlock(bob->god->death);
 }
 
-void	new_time_sleep(t_philo *bob)
+bool	nomnom(t_god *data)
 {
-	pthread_mutex_lock(bob->god->death);
-	pthread_mutex_unlock(bob->god->death);
+	int	i;
+
+	i = 0;
+	while (i != data->philo)
+	{
+		pthread_mutex_lock(&data->philos[i]->nomnom);
+		if (data->philos[i]->eating_amount > 0)
+		{
+			pthread_mutex_unlock(&data->philos[i]->nomnom);
+			return (false);
+		}
+		pthread_mutex_unlock(&data->philos[i]->nomnom);
+		i++;
+	}
+	pthread_mutex_lock(data->death);
+	data->bobs_blood = true;
+	pthread_mutex_unlock(data->death);
+	return (true);
 }
 
-void	new_time_die(t_philo *bob)
-{
-	pthread_mutex_lock(bob->god->death);
-
-	pthread_mutex_unlock(bob->god->death);
-}
 int	check_death(t_philo *bob, t_god *data)
 {
 	pthread_mutex_lock(bob->god->death);
 	if (bob->last_food && (ft_time() - bob->last_food) > (bob->die / 1000))
 	{
-		int	i;
-		i = 0;
-		// printf("%ld %d has died\n", (ft_time() - bob->god->start_time), bob->bobs_id);
+		bob->god->bobs_blood = true;
 		data->death_stamp = ft_time() - data->start_time;
-		while (i != data->philo)
-		{
-			// printf("%i\n", i);
-			// printf("%i\t[%i]\n", i, i > 0);
-			data->philos[i]->stop = true;
-			i++;
-		}
-		// printf("%ld %d has died\n", (ft_time() - bob->god->start_time), bob->bobs_id);
-		
-		bob->god->bobs_blood = false;
+		printf_msg(bob->god, "died", bob->bobs_id, bob->god->death_stamp);
 		pthread_mutex_unlock(bob->god->death);
 		return (1);
 	}
 	pthread_mutex_unlock(bob->god->death);
 	return (0);
+	// int	i;
+
+	// pthread_mutex_lock(bob->god->death);
+	// if (bob->last_food && (ft_time() - bob->last_food) > (bob->die / 1000))
+	// {
+	// 	i = 0;
+	// 	data->death_stamp = ft_time() - data->start_time;
+	// 	printf_msg(bob->god, "died", bob->bobs_id, bob->god->death_stamp);
+	// 	while (i != data->philo)
+	// 	{
+	// 		data->philos[i]->stop = true;
+	// 		i++;
+	// 	}
+	// 	bob->god->bobs_blood = false;
+	// 	pthread_mutex_unlock(bob->god->death);
+	// 	return (1);
+	// }
+	// pthread_mutex_unlock(bob->god->death);
+	// return (0);
 }
 
 void	*death(void *god)
 {
-	t_god	*temp;
-	int	i;
+	t_god	*data;
+	int		i;
 
-	i = 0;
-	temp = (t_god *) god;
-	// pthread_detach(temp->check_death);
-	while (i != temp->philo)
+	data = (t_god *) god;
+	if (data->philo == 1)
+		return (NULL);
+	while (1)
 	{
-		if (check_death(temp->philos[i], temp))
+		i = 0;
+		while (i != data->philo)
 		{
-printf("death is fucking done with it!\n");
-
-			return (NULL);
+			if (check_death(data->philos[i], data))
+				return (NULL);
+			i++;
 		}
-		i++;
-		if (i == (temp->philo))
-			i = 0;
+		if (data->fifth_arg && nomnom(data))
+			return (NULL);
 	}
 	return (NULL);
 }

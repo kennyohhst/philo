@@ -6,13 +6,11 @@
 /*   By: kkalika <kkalika@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/08 15:54:31 by kkalika           #+#    #+#             */
-/*   Updated: 2023/07/17 18:44:34 by kkalika          ###   ########.fr       */
+/*   Updated: 2023/07/21 15:34:45 by kkalika          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/philo.h"
-
-
 
 int	check_args(int argc, char **argv)
 {

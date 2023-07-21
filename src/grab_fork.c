@@ -6,7 +6,7 @@
 /*   By: kkalika <kkalika@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/17 19:55:46 by kkalika           #+#    #+#             */
-/*   Updated: 2023/07/21 14:38:01 by kkalika          ###   ########.fr       */
+/*   Updated: 2023/07/21 18:12:21 by kkalika          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,26 +14,17 @@
 
 bool	grab_fork_fork(t_table *chair)
 {
-// if (chair->id == 1)
-// printf ("%s[%i] bob_%d\n", __func__, __LINE__, chair->id);
 	pthread_mutex_lock(chair->l_fork);
 	if (chair->grab)
 	{
-// if (chair->id == 1)
-// printf ("%s[%i] bob_%d\n", __func__, __LINE__, chair->id);
 		pthread_mutex_unlock(chair->l_fork);
 		return (false);
 	}
-	// else
-	// {
-		
-// if (chair->id == 1)
-// printf ("%s[%i] bob_%d\n", __func__, __LINE__, chair->id);
-		chair->grab = true;
-		pthread_mutex_unlock(chair->l_fork);
-		return (true);
-	// }
+	chair->grab = true;
+	pthread_mutex_unlock(chair->l_fork);
+	return (true);
 }
+
 void	drop_fork_fork(t_table *chair)
 {
 	pthread_mutex_lock(chair->l_fork);
@@ -43,19 +34,14 @@ void	drop_fork_fork(t_table *chair)
 
 int	grab_fork(t_philo **philo)
 {
-	
-// if ((*philo)->bobs_id == 1)
-// printf ("%s[%i] bob_%d\n", __func__, __LINE__, (*philo)->bobs_id);
 	if (ft_stop((*philo)))
 		return (0);
 	while (!grab_fork_fork((*philo)->table))
-		ft_usleep(100, (*philo));
+		ft_usleep(100);
 	if (!ft_stop((*philo)))
 		printf_msg((*philo)->god, "has taken a fork", (*philo)->bobs_id, 0);
-
-	while (!grab_fork_fork((*philo)->table->next))
-		ft_usleep(100, (*philo));
-
+	while (!grab_fork_fork((*philo)->table->next) && (*philo)->god->philo > 1)
+		ft_usleep(100);
 	if (!ft_stop((*philo)))
 		printf_msg((*philo)->god, "has taken b fork", (*philo)->bobs_id, 0);
 	return (1);
