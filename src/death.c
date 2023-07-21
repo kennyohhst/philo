@@ -6,7 +6,7 @@
 /*   By: kkalika <kkalika@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/13 20:08:44 by kkalika           #+#    #+#             */
-/*   Updated: 2023/07/20 21:26:34 by kkalika          ###   ########.fr       */
+/*   Updated: 2023/07/21 15:08:51 by kkalika          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,49 +15,41 @@
 void	new_time_eat(t_philo *bob)
 {
 	pthread_mutex_lock(bob->god->death);
-	// printf("hi\n");
 		bob->last_food = ft_time();
-		// printf("die: %ld\neat: %ld\nsleep: %ld\n", bob->die, bob->eat, bob->sleep);
 	pthread_mutex_unlock(bob->god->death);
 }
 
 void	new_time_sleep(t_philo *bob)
 {
 	pthread_mutex_lock(bob->god->death);
-		// bob->god->start_time = ft_time();
 	pthread_mutex_unlock(bob->god->death);
 }
 
 void	new_time_die(t_philo *bob)
 {
 	pthread_mutex_lock(bob->god->death);
-	// bob->start_time = ft_time();
-	// printf("start: %ld\n die: %ld\n", (bob->start_time / 1000), (bob->die / 1000));
+
 	pthread_mutex_unlock(bob->god->death);
 }
-int	check_death(t_philo *bob)
+int	check_death(t_philo *bob, t_god *data)
 {
-	int	i;
 	pthread_mutex_lock(bob->god->death);
-	// printf("bob_%d welcome, you have %d sec left to live\n", bob->bobs_id, (ft_time() - bob->last_food) > bob->die);
-	// printf("bob_%d	death:	%ld	current:	%ld last_meal:	%ld\n", bob->bobs_id, bob->die, ft_time(), bob->last_food);
 	if (bob->last_food && (ft_time() - bob->last_food) > (bob->die / 1000))
 	{
-		i = bob->god->philo;
-		printf("\t%ld %d has died\n", (ft_time() - bob->god->start_time), bob->bobs_id);
-
-		while (i > 0)
+		int	i;
+		i = 0;
+		// printf("%ld %d has died\n", (ft_time() - bob->god->start_time), bob->bobs_id);
+		data->death_stamp = ft_time() - data->start_time;
+		while (i != data->philo)
 		{
-			printf("%i\n", i);
-			bob->god->philos[i]->stop = true;
-			printf("%i\t[%i]\n", i, i > 0);
-			i--;
+			// printf("%i\n", i);
+			// printf("%i\t[%i]\n", i, i > 0);
+			data->philos[i]->stop = true;
+			i++;
 		}
-		printf("%ld %d has died\n", (ft_time() - bob->god->start_time), bob->bobs_id);
+		// printf("%ld %d has died\n", (ft_time() - bob->god->start_time), bob->bobs_id);
 		
-		// bob->stop = true;
 		bob->god->bobs_blood = false;
-// printf("\t%ld - %s[%i] bob_%d\n", (ft_time() - bob->god->start_time), __func__, __LINE__, bob->bobs_id);
 		pthread_mutex_unlock(bob->god->death);
 		return (1);
 	}
@@ -75,8 +67,12 @@ void	*death(void *god)
 	// pthread_detach(temp->check_death);
 	while (i != temp->philo)
 	{
-		if (check_death(temp->philos[i]))
+		if (check_death(temp->philos[i], temp))
+		{
+printf("death is fucking done with it!\n");
+
 			return (NULL);
+		}
 		i++;
 		if (i == (temp->philo))
 			i = 0;

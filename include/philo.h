@@ -6,7 +6,7 @@
 /*   By: kkalika <kkalika@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/13 21:41:30 by code              #+#    #+#             */
-/*   Updated: 2023/07/20 19:32:42 by kkalika          ###   ########.fr       */
+/*   Updated: 2023/07/21 14:59:26 by kkalika          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,7 @@ typedef struct philos
 	t_table			*table;
 	pthread_t		philo;
 	struct s_god	*god;
-	pthread_mutex_t	*time_bob;
+	// pthread_mutex_t	*time_bob;
 }t_philo;
 
 typedef	struct s_god
@@ -55,6 +55,7 @@ typedef	struct s_god
 	int				eating_amount;
 	long			start_time;
 	bool			bobs_blood;
+	long			death_stamp;
 	t_philo			*philos[200];
 	t_table			*table;
 	pthread_t		check_death;
@@ -88,7 +89,7 @@ void	new_time_eat(t_philo *bob);
 void	new_time_sleep(t_philo *bob);
 void	new_time_die(t_philo *bob);
 void	freelosopher(t_god *data);
-void	printf_msg(t_god *god, char *str, int i);
+void	printf_msg(t_god *god, char *str, int i, long stamp);
 void	init_mutex(t_god *data);
 int		ft_stop(t_philo *philo);
 int		basic_data(t_god **temp, int argc, char **argv);

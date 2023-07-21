@@ -6,7 +6,7 @@
 /*   By: kkalika <kkalika@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/08 17:48:01 by kkalika           #+#    #+#             */
-/*   Updated: 2023/07/20 19:20:50 by kkalika          ###   ########.fr       */
+/*   Updated: 2023/07/21 15:16:11 by kkalika          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,7 @@ int	main(int argc, char **argv)
 		i++;
 	}
 	pthread_join(data->check_death, NULL);
+printf("I've recalled all the bobs and will end the universe!\n");
 	freelosopher(data);
 	
 	

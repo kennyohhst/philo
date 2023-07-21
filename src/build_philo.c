@@ -6,7 +6,7 @@
 /*   By: kkalika <kkalika@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/17 18:43:38 by kkalika           #+#    #+#             */
-/*   Updated: 2023/07/20 19:17:06 by kkalika          ###   ########.fr       */
+/*   Updated: 2023/07/21 15:23:45 by kkalika          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ t_philo	*build_philos(t_god **temp)
 	bob = malloc(sizeof(t_philo));
 	if (!bob)
 		return (NULL);
-	bob->time_bob = malloc(sizeof(pthread_mutex_t));
+	// bob->time_bob = malloc(sizeof(pthread_mutex_t));
 	bob->god = (*temp);
 	bob->bobs_id = 0;
 	bob->total_philos = (*temp)->philo;
