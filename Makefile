@@ -9,7 +9,7 @@ OBJ_DIR := obj
 # Compiler flags
 CC := gcc
 CFLAGS := -Wall -Werror -Wextra #-g 
-# CFLAGS +=	-fsanitize=address
+#CFLAGS +=	-fsanitize=address
 # CFLAGS +=	-fsanitize=thread
 
 # Includes

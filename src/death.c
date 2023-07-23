@@ -6,7 +6,7 @@
 /*   By: kkalika <kkalika@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/13 20:08:44 by kkalika           #+#    #+#             */
-/*   Updated: 2023/07/21 19:48:54 by kkalika          ###   ########.fr       */
+/*   Updated: 2023/07/23 16:46:19 by kkalika          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,22 +35,26 @@ bool	nomnom(t_god *data)
 		pthread_mutex_unlock(&data->philos[i]->nomnom);
 		i++;
 	}
-	pthread_mutex_lock(&data->death);
+	pthread_mutex_lock(&data->blood_check);
 	data->bobs_blood = true;
-	pthread_mutex_unlock(&data->death);
+	pthread_mutex_unlock(&data->blood_check);
 	return (true);
 }
 
 int	check_death(t_philo *bob, t_god *data)
 {
 	pthread_mutex_lock(&data->death);
-	if (bob->last_food && (ft_time() - bob->last_food) > (bob->die / 1000))
+	if (bob->last_food && (ft_time() - bob->last_food) > (unsigned long) (bob->die / 1000))
 	{
+		pthread_mutex_lock(&data->blood_check);
 		data->bobs_blood = true;
+		pthread_mutex_unlock(&data->blood_check);
 		pthread_mutex_unlock(&data->death);
-		printf_msg(data, "died", bob->bobs_id);
+// printf("ft_time()		 - 		last_food_time = \n%ld	-	%ld = %ld\n", ft_time(), bob->last_food, (ft_time() - bob->last_food));
+		printf_msg(data, "died", bob->bobs_id, ft_time());
 		return (1);
 	}
+	bob->last_food = ft_time();
 	pthread_mutex_unlock(&data->death);
 	return (0);
 }

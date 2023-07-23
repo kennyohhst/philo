@@ -6,7 +6,7 @@
 /*   By: kkalika <kkalika@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/13 21:41:30 by code              #+#    #+#             */
-/*   Updated: 2023/07/21 20:18:33 by kkalika          ###   ########.fr       */
+/*   Updated: 2023/07/23 16:44:52 by kkalika          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,11 +32,11 @@ typedef struct s_table
 typedef struct philos
 {
 	bool			present;
-	long			last_food;
-	int				bobs_id;
-	long			eat;	
+	unsigned long			last_food;	//death
+	int				bobs_id; // msg
+	long			eat;
 	long			sleep;
-	int				eating_amount;
+	int				eating_amount; // nomnom
 	long			die;
 	int				fork;
 	t_table			*table;
@@ -48,21 +48,21 @@ typedef struct philos
 typedef struct s_god
 {
 	int				philo;
-	int				die;
+	int				die;	// death
 	int				sleep;
 	int				eat;
 	int				eating_amount;
-	bool			bobs_blood;
+	bool			bobs_blood;	// death
 	bool			fifth_arg;
-	long			start_time;
+	unsigned long			start_time;	// msg
 	long			death_stamp;
 	t_philo			*philos[200];
 	t_table			*table;
 	pthread_t		check_death;
 	pthread_mutex_t	death;
 	pthread_mutex_t	msg;
-	pthread_mutex_t	time;
-}t_god;
+	pthread_mutex_t	blood_check;
+}	t_god;
 
 int		eat_sleep_think(t_philo *philo);
 t_god	*parse(int argc, char **argv);
@@ -81,14 +81,14 @@ int		basic_data(t_god **temp, int argc, char **argv);
 int		build_table(t_god **data, int i);
 t_philo	*build_philos(t_god **temp);
 int		make_round(t_god *data);
-long	ft_time(void);
+unsigned long	ft_time(void);
 void	*death(void *god);
 void	set_time(t_philo *bob);
 void	new_time_eat(t_philo *bob);
 void	new_time_sleep(t_philo *bob);
 void	new_time_die(t_philo *bob);
 void	freelosopher(t_god *data);
-void	printf_msg(t_god *god, char *str, int i);
+void	printf_msg(t_god *god, char *str, int i, unsigned long current_time);
 void	init_mutex(t_god *data);
 int		ft_stop(t_god *data);
 int		basic_data(t_god **temp, int argc, char **argv);
@@ -98,7 +98,7 @@ int		make_round(t_god *data);
 bool	grab_fork_fork(t_table *chair);
 int		grab_fork(t_philo **philo);
 void	drop_fork_fork(t_table *chair);
-void	ft_usleep(long time);
+void	ft_usleep(unsigned long time);
 int		ft_strncmp(const char *s1, const char *s2, size_t n);
 void	*life(void *philo);
 void	*bobs_single(t_philo *bob);

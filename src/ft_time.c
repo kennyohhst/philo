@@ -6,13 +6,13 @@
 /*   By: kkalika <kkalika@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/14 20:28:18 by kkalika           #+#    #+#             */
-/*   Updated: 2023/07/21 15:42:37 by kkalika          ###   ########.fr       */
+/*   Updated: 2023/07/23 15:36:54 by kkalika          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/philo.h"
 
-long	ft_time(void)
+unsigned long	ft_time(void)
 {
 	struct timeval	start;
 

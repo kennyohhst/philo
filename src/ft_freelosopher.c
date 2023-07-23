@@ -6,7 +6,7 @@
 /*   By: kkalika <kkalika@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/14 21:40:28 by kkalika           #+#    #+#             */
-/*   Updated: 2023/07/21 19:24:00 by kkalika          ###   ########.fr       */
+/*   Updated: 2023/07/23 14:49:45 by kkalika          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 void	end_universe(t_god *god)
 {
-	pthread_mutex_destroy(&god->time);
+	pthread_mutex_destroy(&god->blood_check);
 	pthread_mutex_destroy(&god->death);
 	pthread_mutex_destroy(&god->msg);
 
