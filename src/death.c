@@ -6,7 +6,7 @@
 /*   By: kkalika <kkalika@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/13 20:08:44 by kkalika           #+#    #+#             */
-/*   Updated: 2023/07/23 16:46:19 by kkalika          ###   ########.fr       */
+/*   Updated: 2023/07/24 20:44:11 by kkalika          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,17 +44,16 @@ bool	nomnom(t_god *data)
 int	check_death(t_philo *bob, t_god *data)
 {
 	pthread_mutex_lock(&data->death);
-	if (bob->last_food && (ft_time() - bob->last_food) > (unsigned long) (bob->die / 1000))
+	if (bob->last_food
+		&& (ft_time() - bob->last_food) > (unsigned long)(bob->die))
 	{
+		pthread_mutex_unlock(&data->death);
 		pthread_mutex_lock(&data->blood_check);
 		data->bobs_blood = true;
 		pthread_mutex_unlock(&data->blood_check);
-		pthread_mutex_unlock(&data->death);
-// printf("ft_time()		 - 		last_food_time = \n%ld	-	%ld = %ld\n", ft_time(), bob->last_food, (ft_time() - bob->last_food));
 		printf_msg(data, "died", bob->bobs_id, ft_time());
 		return (1);
 	}
-	bob->last_food = ft_time();
 	pthread_mutex_unlock(&data->death);
 	return (0);
 }
@@ -72,12 +71,13 @@ void	*death(void *god)
 		i = 0;
 		while (i != data->philo)
 		{
+			if (data->fifth_arg && nomnom(data))
+				return (NULL);
 			if (check_death(data->philos[i], data))
 				return (NULL);
 			i++;
 		}
-		if (data->fifth_arg && nomnom(data))
-			return (NULL);
+		// usleep(10);
 	}
 	return (NULL);
 }

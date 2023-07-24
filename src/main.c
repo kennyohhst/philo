@@ -6,7 +6,7 @@
 /*   By: kkalika <kkalika@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/08 17:48:01 by kkalika           #+#    #+#             */
-/*   Updated: 2023/07/23 15:16:18 by kkalika          ###   ########.fr       */
+/*   Updated: 2023/07/24 19:26:38 by kkalika          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,6 @@ int	main(int argc, char **argv)
 	long	i;
 
 	i = 0;
-
 	data = parse(argc, argv);
 	if (!data)
 		return (EXIT_FAILURE);
