@@ -6,7 +6,7 @@
 /*   By: kkalika <kkalika@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/13 21:41:30 by code              #+#    #+#             */
-/*   Updated: 2023/07/24 20:25:12 by kkalika          ###   ########.fr       */
+/*   Updated: 2023/07/25 15:39:00 by kkalika          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,7 +94,6 @@ int				basic_data(t_god **temp, int argc, char **argv);
 int				build_table(t_god **data, int i);
 t_philo			*build_philos(t_god **temp);
 int				make_round(t_god *data);
-bool			grab_fork_fork(t_table *chair);
 int				grab_fork(t_philo **philo);
 void			drop_fork_fork(t_table *chair);
 void			ft_usleep(unsigned long time);

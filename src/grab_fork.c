@@ -6,13 +6,13 @@
 /*   By: kkalika <kkalika@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/17 19:55:46 by kkalika           #+#    #+#             */
-/*   Updated: 2023/07/24 19:25:55 by kkalika          ###   ########.fr       */
+/*   Updated: 2023/07/25 15:37:17 by kkalika          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/philo.h"
 
-bool	grab_fork_fork(t_table *chair)
+static bool	grab_fork_fork(t_table *chair)
 {
 	pthread_mutex_lock(&chair->l_fork);
 	if (chair->grab)

@@ -6,13 +6,13 @@
 /*   By: kkalika <kkalika@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/14 21:40:28 by kkalika           #+#    #+#             */
-/*   Updated: 2023/07/24 19:24:42 by kkalika          ###   ########.fr       */
+/*   Updated: 2023/07/25 15:37:03 by kkalika          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/philo.h"
 
-void	end_universe(t_god *god)
+static void	end_universe(t_god *god)
 {
 	pthread_mutex_destroy(&god->blood_check);
 	pthread_mutex_destroy(&god->death);
@@ -20,7 +20,7 @@ void	end_universe(t_god *god)
 	free(god);
 }
 
-void	free_bob(t_god *god)
+static void	free_bob(t_god *god)
 {
 	int	i;
 
@@ -34,7 +34,7 @@ void	free_bob(t_god *god)
 	}
 }
 
-void	free_list(t_god *god)
+static void	free_list(t_god *god)
 {
 	t_table	*temp;
 	int		i;

@@ -6,7 +6,7 @@
 /*   By: kkalika <kkalika@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/10 18:09:21 by kkalika           #+#    #+#             */
-/*   Updated: 2023/07/24 20:41:06 by kkalika          ###   ########.fr       */
+/*   Updated: 2023/07/25 15:38:42 by kkalika          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,8 +39,8 @@ int	eat_sleep_think(t_philo *philo)
 		philo->eating_amount--;
 		pthread_mutex_unlock(&philo->nomnom);
 	}
-	drop_fork_fork(philo->table);
 	drop_fork_fork(philo->table->next);
+	drop_fork_fork(philo->table);
 	if (!ft_stop(philo->god))
 	{
 		printf_msg(philo->god, "is sleeping", philo->bobs_id, ft_time());

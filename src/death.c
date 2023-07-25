@@ -6,7 +6,7 @@
 /*   By: kkalika <kkalika@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/13 20:08:44 by kkalika           #+#    #+#             */
-/*   Updated: 2023/07/24 20:44:11 by kkalika          ###   ########.fr       */
+/*   Updated: 2023/07/25 15:32:17 by kkalika          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ void	new_time_eat(t_philo *bob)
 	pthread_mutex_unlock(&bob->god->death);
 }
 
-bool	nomnom(t_god *data)
+static bool	nomnom(t_god *data)
 {
 	int	i;
 
@@ -41,7 +41,7 @@ bool	nomnom(t_god *data)
 	return (true);
 }
 
-int	check_death(t_philo *bob, t_god *data)
+static int	check_death(t_philo *bob, t_god *data)
 {
 	pthread_mutex_lock(&data->death);
 	if (bob->last_food
@@ -77,7 +77,6 @@ void	*death(void *god)
 				return (NULL);
 			i++;
 		}
-		// usleep(10);
 	}
 	return (NULL);
 }
