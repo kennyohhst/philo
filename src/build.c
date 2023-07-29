@@ -3,14 +3,23 @@
 /*                                                        :::      ::::::::   */
 /*   build.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kkalika <kkalika@student.42.fr>            +#+  +:+       +#+        */
+/*   By: code <code@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/08 15:54:31 by kkalika           #+#    #+#             */
-/*   Updated: 2023/07/24 19:22:59 by kkalika          ###   ########.fr       */
+/*   Updated: 2023/07/29 04:09:39 by code             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/philo.h"
+
+/**
+ * This function adds two integers and returns the result.
+ *
+ * @param a ARGC
+ * @param b ARGV
+ * @return 1 IF GOOD, 0 IF BAD
+ */
+
 
 int	check_args(int argc, char **argv)
 {

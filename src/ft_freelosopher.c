@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_freelosopher.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kkalika <kkalika@student.42.fr>            +#+  +:+       +#+        */
+/*   By: code <code@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/14 21:40:28 by kkalika           #+#    #+#             */
-/*   Updated: 2023/07/25 15:37:03 by kkalika          ###   ########.fr       */
+/*   Updated: 2023/07/30 15:27:18 by code             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@ static void	end_universe(t_god *god)
 	pthread_mutex_destroy(&god->blood_check);
 	pthread_mutex_destroy(&god->death);
 	pthread_mutex_destroy(&god->msg);
+	pthread_mutex_destroy(&god->start);
 	free(god);
 }
 

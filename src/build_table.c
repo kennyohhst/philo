@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   build_table.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kkalika <kkalika@student.42.fr>            +#+  +:+       +#+        */
+/*   By: code <code@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/17 18:42:12 by kkalika           #+#    #+#             */
-/*   Updated: 2023/07/21 19:22:44 by kkalika          ###   ########.fr       */
+/*   Updated: 2023/07/29 02:00:19 by code             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,6 @@ int	build_table(t_god **data, int i)
 	if (!new)
 		return (0);
 	new->id = i;
-	new->grab = false;
 	temp = (*data)->table;
 	if (temp)
 	{

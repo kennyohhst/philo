@@ -38,7 +38,7 @@ SRC_FILES :=	main.c \
 				ft_usleep.c \
 				ft_strncmp.c \
 				life.c \
-
+				protect_create.c \
 
 SRC := $(addprefix $(SRC_DIR)/, $(SRC_FILES))
 OBJ := ${addprefix ${OBJ_DIR}/, ${SRC_FILES:.c=.o}}

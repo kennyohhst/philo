@@ -3,48 +3,19 @@
 /*                                                        :::      ::::::::   */
 /*   grab_fork.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kkalika <kkalika@student.42.fr>            +#+  +:+       +#+        */
+/*   By: code <code@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/17 19:55:46 by kkalika           #+#    #+#             */
-/*   Updated: 2023/07/25 15:37:17 by kkalika          ###   ########.fr       */
+/*   Updated: 2023/07/30 15:27:59 by code             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/philo.h"
 
-static bool	grab_fork_fork(t_table *chair)
+void	grab_fork(t_philo **philo)
 {
-	pthread_mutex_lock(&chair->l_fork);
-	if (chair->grab)
-	{
-		pthread_mutex_unlock(&chair->l_fork);
-		return (false);
-	}
-	chair->grab = true;
-	pthread_mutex_unlock(&chair->l_fork);
-	return (true);
-}
-
-void	drop_fork_fork(t_table *chair)
-{
-	pthread_mutex_lock(&chair->l_fork);
-	chair->grab = false;
-	pthread_mutex_unlock(&chair->l_fork);
-}
-
-int	grab_fork(t_philo **philo)
-{
-	if (ft_stop((*philo)->god))
-		return (0);
-	while (!grab_fork_fork((*philo)->table))
-		;
-	if (!ft_stop((*philo)->god))
-		printf_msg((*philo)->god, "has taken a fork", (*philo)->bobs_id,
-			ft_time());
-	while (!grab_fork_fork((*philo)->table->next) && (*philo)->god->philo > 1)
-		;
-	if (!ft_stop((*philo)->god))
-		printf_msg((*philo)->god, "has taken a fork", (*philo)->bobs_id,
-			ft_time());
-	return (1);
+	pthread_mutex_lock(&(*philo)->table->l_fork);
+	printf_msg((*philo)->god, "has taken a fork", (*philo)->bobs_id, ft_time());
+	pthread_mutex_lock(&(*philo)->table->next->l_fork);
+	printf_msg((*philo)->god, "has taken a fork", (*philo)->bobs_id, ft_time());
 }

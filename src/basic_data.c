@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   basic_data.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kkalika <kkalika@student.42.fr>            +#+  +:+       +#+        */
+/*   By: code <code@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/17 18:41:05 by kkalika           #+#    #+#             */
-/*   Updated: 2023/07/21 19:22:52 by kkalika          ###   ########.fr       */
+/*   Updated: 2023/07/29 03:39:38 by code             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,11 +23,13 @@ int	basic_data(t_god **temp, int argc, char **argv)
 	if (add_sleep(temp, argv[4]))
 		return (add_sleep(temp, argv[4]));
 	(*temp)->fifth_arg = false;
+	(*temp)->bobs_blood = false;
 	if (argc == 6)
 	{
 		(*temp)->fifth_arg = true;
 		if (add_eating_amount(temp, argv[5]))
 			return (add_eating_amount(temp, argv[5]));
 	}
+	init_mutex((*temp));
 	return (0);
 }
